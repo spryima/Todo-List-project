@@ -1,7 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>ToDo list</h1>
+  <h1>ToDo list</h1>
+      <a href="{% url 'todo:task-create' %}">
+      Add Task
+      </a>
+  {% for task in tasks %}
+    <div>
+      {{ task.content }} {{ task.status }}
+      Created: {{ task.datetime }}
+      Tags: {{ task.tags }}
+
+
+    </div>
+  {% endfor %}
+
 
 
 {% endblock %}

@@ -1,12 +1,16 @@
-from django.shortcuts import render
-from django.views.generic import ListView
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy
+from django.views import View
+from django.views.generic import ListView, CreateView, DeleteView
 
+from todo.forms import AddTaskForm, AddTagForm
 from todo.models import Task, Tag
 
 
 class TagListView(ListView):
     model = Tag
     context_object_name = "tags"
+    template_name = "todo/tags.html"
 
 
 class TaskListView(ListView):
@@ -14,3 +18,29 @@ class TaskListView(ListView):
     context_object_name = "tasks"
     template_name = "todo/index.html"
 
+
+class TaskCreateView(CreateView):
+    model = Task
+    form_class = AddTaskForm
+    success_url = reverse_lazy("todo:task-list")
+
+
+class TaskDeleteView(View):
+    model = Task
+    success_url = reverse_lazy("todo:task-list")
+
+
+
+
+class TagCreateView(CreateView):
+    model = Tag
+    form_class = AddTagForm
+    success_url = reverse_lazy("todo:tag-list")
+
+
+class TagDeleteView(View):
+
+    def post(self, request, pk):
+        tag = get_object_or_404(Tag, pk=pk)
+        tag.delete()
+        return redirect('todo:tag-list')
