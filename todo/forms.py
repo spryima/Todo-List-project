@@ -17,3 +17,9 @@ class AddTagForm(forms.ModelForm):
     class Meta:
         model = Tag
         fields = "__all__"
+
+
+class TagUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Tag
+        fields = "__all__"
