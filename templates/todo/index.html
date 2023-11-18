@@ -10,7 +10,7 @@
       {% for task in tasks %}
         <tr>
           <td>{{ task.content }}</td>
-          <td>{% if task.status %}Done {% else %}Not done{% endif %}</td>
+          <td>{% if task.status %} <span style="color: green;">Done</span> {% else %}<span style="color: red;">Not done</span> {% endif %}</td>
           <td>{{ task.datetime }}</td>
           <td>
             {% for task in task.tags.all %}
