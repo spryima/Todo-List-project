@@ -15,7 +15,7 @@
     <tbody>
       {% for tag in tags %}
         <tr>
-          <td>{{ tag.name }}</td>
+          <td>{{ tag.name }}&nbsp;&nbsp;&nbsp;&nbsp;</td>
           <td>
             <form action="{% url 'todo:tag-update' tag.id %}" method="post" style="display: inline;">
               {% csrf_token %}

@@ -9,7 +9,7 @@ class Task(models.Model):
     content = models.TextField()
     datetime = models.DateTimeField(auto_now_add=True)
     deadline = models.DateTimeField(blank=True, null=True)
-    status = models.BooleanField(blank=True, null=True)
+    status = models.BooleanField(default=False, blank=True, null=True)
     tags = models.ManyToManyField(Tag, related_name="tasks")
 
     class Meta:

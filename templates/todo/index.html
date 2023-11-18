@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>ToDo List</h1>
-  <a href="{% url 'todo:task-create' %}">Add Task</a>
-
+  <div style="display: flex;">
+    <h1>ToDo List </h1>
+    <a href="{% url 'todo:task-create' %}"><button type="submit" style="background-color: darkblue; color: white">Add Task</button></a>
+  </div>
   <table>
 
     <tbody>
