@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div style="display: flex;">
+    <h1>ToDo List &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+    <a href="{% url 'todo:task-create' %}">
+      <button type="submit" style="background-color: darkblue; color: white">Add Task</button>
+    </a>
+  </div>
+  <table>
+
+    <tbody>
+    {% for task in tasks %}
+      <tr>
+        <td>{{ task.content }}</td>
+        <td>{% if task.status %} <span style="color: green;">Done</span> {% else %}
+          <span style="color: red;">Not done</span> {% endif %}</td>
+        <td>{{ task.datetime }}</td>
+        <td>
+          {% for task in task.tags.all %}
+            {{ tag.name }}&nbsp;
+          {% endfor %}
+        </td>
+        <td>
+
+          {% if task.status %}
+            <form action="{% url 'todo:task-undone' task.id %}" method="post" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit" style="background-color: grey">Undo</button>
+            </form>
+          {% else %}
+            <form action="{% url 'todo:task-done' task.id %}" method="post" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit" style="background-color: green">Complete</button>
+            </form>
+
+          {% endif %}
+
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
