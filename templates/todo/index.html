@@ -1,20 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>ToDo list</h1>
-      <a href="{% url 'todo:task-create' %}">
-      Add Task
-      </a>
-  {% for task in tasks %}
-    <div>
-      {{ task.content }} {{ task.status }}
-      Created: {{ task.datetime }}
-      Tags: {{ task.tags }}
+  <h1>ToDo List</h1>
+  <a href="{% url 'todo:task-create' %}">Add Task</a>
 
+  <table>
 
-    </div>
-  {% endfor %}
+    <tbody>
+      {% for task in tasks %}
+        <tr>
+          <td>{{ task.content }}</td>
+          <td>{% if task.status %}Done {% else %}Not done{% endif %}</td>
+          <td>{{ task.datetime }}</td>
+          <td>
+            {% for task in task.tags.all %}
+              {{ tag.name }}&nbsp;
+            {% endfor %}
+          </td>
+          <td>
 
-
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
 {% endblock %}

@@ -25,9 +25,14 @@ class TaskCreateView(CreateView):
     success_url = reverse_lazy("todo:task-list")
 
 
-class TaskDeleteView(View):
-    model = Task
-    success_url = reverse_lazy("todo:task-list")
+class TaskDoneView(View):
+    def post(self, request, pk):
+        tag = get_object_or_404(Tag, pk=pk)
+        tag.status = True
+        tag.save()
+        return redirect('todo:task-list')
+
+
 
 
 

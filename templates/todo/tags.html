@@ -2,20 +2,28 @@
 
 {% block content %}
   <h1>Tags</h1>
-      <a href="{% url 'todo:tag-create' %}">
-      Add Tag
-      </a>
-  {% for tag in tags %}
-    <div>
-      {{ tag.name }}
-      <form action="{% url 'todo:tag-delete' tag.id %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Delete</button>
-      </form>
+  <a href="{% url 'todo:tag-create' %}">Add Tag</a>
 
-    </div>
-  {% endfor %}
-
-
+  <table>
+    <thead>
+      <tr>
+        <th>Tag Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tag in tags %}
+        <tr>
+          <td>{{ tag.name }}</td>
+          <td>
+            <form action="{% url 'todo:tag-delete' tag.id %}" method="post" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
 {% endblock %}
