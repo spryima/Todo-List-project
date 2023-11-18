@@ -1,35 +1,39 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Tags</h1>
-  <a href="{% url 'todo:tag-create' %}">Add Tag</a>
+  <div style="display: flex;">
+    <h1>Tags&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </h1>
+    <a href="{% url 'todo:tag-create' %}">
+      <button type="submit" style="background-color: darkblue; color: white">Add Tag</button>
+    </a>
+  </div>
 
   <table>
     <thead>
-      <tr>
-        <th>Name</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
+    <tr>
+      <th>Name</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
     </thead>
     <tbody>
-      {% for tag in tags %}
-        <tr>
-          <td>{{ tag.name }}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-          <td>
-            <form action="{% url 'todo:tag-update' tag.id %}" method="post" style="display: inline;">
-              {% csrf_token %}
-              <button type="submit">Update</button>
-            </form>
-          </td>
-          <td>
-            <form action="{% url 'todo:tag-delete' tag.id %}" method="post" style="display: inline;">
-              {% csrf_token %}
-              <button type="submit">Delete</button>
-            </form>
-          </td>
-        </tr>
-      {% endfor %}
+    {% for tag in tags %}
+      <tr>
+        <td>{{ tag.name }}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>
+          <form action="{% url 'todo:tag-update' tag.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit">Update</button>
+          </form>
+        </td>
+        <td>
+          <form action="{% url 'todo:tag-delete' tag.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
     </tbody>
   </table>
 
