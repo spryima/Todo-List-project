@@ -27,14 +27,17 @@ class TaskCreateView(CreateView):
 
 class TaskDoneView(View):
     def post(self, request, pk):
-        tag = get_object_or_404(Tag, pk=pk)
+        tag = get_object_or_404(Task, pk=pk)
         tag.status = True
         tag.save()
         return redirect('todo:task-list')
 
-
-
-
+class TaskUnDoneView(View):
+    def post(self, request, pk):
+        tag = get_object_or_404(Task, pk=pk)
+        tag.status = False
+        tag.save()
+        return redirect('todo:task-list')
 
 
 class TagCreateView(CreateView):
